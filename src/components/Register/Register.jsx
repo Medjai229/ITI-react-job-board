@@ -43,7 +43,7 @@ export default function Register() {
       .required("Confirm password is required"),
     role: Yup.string().oneOf(["job_seeker", "employer"]).default("job_seeker"),
   });
-
+  
   async function register(values, { setSubmitting }) {
     try {
       setApiError(null);
@@ -53,7 +53,7 @@ export default function Register() {
         setOpenSnackbar(true);
         setTimeout(() => {
           navigate("/login");
-        }, 2000);
+        }, 1000);
       }
     } catch (error) {
       console.error("Registration error:", error.message);
@@ -84,7 +84,7 @@ export default function Register() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          background: "linear-gradient(to bottom, #002855, #004aad, #0099ff)", 
+          backgroundImage: 'url("endless-constellation.png")',
           padding: 2,
         }}
       >
