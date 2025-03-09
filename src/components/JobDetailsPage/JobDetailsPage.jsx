@@ -41,7 +41,7 @@ function JobDetailsPage() {
         </Box>
       ) : !selectedJob ? (
         <Typography variant="body1" align="center" sx={{ mt: 4, color: "#0F1137" }}>
-          لا توجد بيانات للوظيفة
+          No Job Details!
         </Typography>
       ) : (
         <>
