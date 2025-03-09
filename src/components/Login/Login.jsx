@@ -21,12 +21,16 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MuiAlert from "@mui/material/Alert";
 import useAuthStore from "../../store/useAuthStore"; // Zustand Store for Token
+import { motion } from "framer-motion"; // Import motion for animation
+
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [apiError, setApiError] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [emailNotFound, setEmailNotFound] = useState(false); //  state for email existence check
+
   let navigate = useNavigate();
 
   const { setToken } = useAuthStore(); // Zustand Token Management
@@ -46,6 +50,8 @@ export default function Login() {
   async function login(values, { setSubmitting }) {
     try {
       setApiError(null);
+      setEmailNotFound(false); // Reset state before checking
+
       const { email, password, rememberMe } = values; // Remove `rememberMe` before sending
 
       let response = await axios.post("http://localhost:3000/api/auth/login", { email, password });
@@ -63,9 +69,15 @@ export default function Login() {
       }
     } catch (error) {
       console.error("❌ Login error:", error.response?.data || error.message);
-      setApiError(error.response?.data?.message || "Invalid credentials.");
-      setSnackbarMessage("⚠️ Invalid email or password.");
+      const errorMessage = error.response?.data?.message || "Invalid credentials.";
+      setApiError(errorMessage);
+      setSnackbarMessage("⚠️ " + errorMessage);
       setOpenSnackbar(true);
+
+      // If the error indicates the email is not found, show the "Register Here" button
+      if (errorMessage.toLowerCase().includes("email does not exist. you must register first.")) {
+        setEmailNotFound(true);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -90,6 +102,11 @@ export default function Login() {
           padding: 2,
         }}
       >
+        <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
         <Paper
           elevation={6}
           sx={{
@@ -169,7 +186,43 @@ export default function Login() {
               </Grid>
             </Grid>
           </form>
+           {/* Show Register Button with Animation if Email Not Found */}
+           {emailNotFound && (
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.5 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }} // Smooth zoom effect
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => navigate("/")}
+                  sx={{
+                    backgroundColor: "#007BFF",
+                    color: "white",
+                    padding: "12px 24px",
+                    borderRadius: "50px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": {
+                      backgroundColor: "#0056b3",
+                      transform: "translateY(-2px) scale(1.05)",
+                    },
+                  }}
+                >
+                  🆕 No Account? Register Here!
+                </Button>
+              </motion.div>
+            )}
         </Paper>
+        </motion.div>
 
         {/* Snackbar for Success/Error Messages */}
         <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>

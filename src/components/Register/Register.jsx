@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import {TextField,Button,Select,MenuItem,InputLabel,FormControl,Typography,Grid,Paper,Alert,IconButton,InputAdornment,Snackbar,CssBaseline,Box,} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MuiAlert from "@mui/material/Alert";
+import { motion } from "framer-motion"; // Import motion for animation
+
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,8 @@ export default function Register() {
   const [apiError, setApiError] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [emailExists, setEmailExists] = useState(false); //  Added state for checking email existence
+
   let navigate = useNavigate();
 
   // Initial form values
@@ -47,6 +51,7 @@ export default function Register() {
   async function register(values, { setSubmitting }) {
     try {
       setApiError(null);
+      setEmailExists(false);//Reset email existence state before submitting
       let response = await axios.post("http://localhost:3000/api/auth/signUp", values);
       if (response.status === 200) {
         setSnackbarMessage("🎉 Registration successful! Redirecting to login...");
@@ -58,8 +63,15 @@ export default function Register() {
     } catch (error) {
       console.error("Registration error:", error.message);
       if (error.response) {
-        setApiError(error.response.data.message || "Something went wrong");
-        setSnackbarMessage("⚠️ Email already registered! Try logging in.");
+        const errorMessage = error.response.data.message || "Something went wrong";
+
+        setApiError(errorMessage);
+
+        if (errorMessage.toLowerCase().includes("email already exists")) {
+          setEmailExists(true); // Show the Login button with animation
+        }
+
+        setSnackbarMessage("⚠️ " + errorMessage);
         setOpenSnackbar(true);
       }
     } finally {
@@ -88,6 +100,11 @@ export default function Register() {
           padding: 2,
         }}
       >
+         <motion.div
+          initial={{ scale: 0.5, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
         <Paper
           elevation={6}
           sx={{
@@ -205,9 +222,48 @@ export default function Register() {
                   REGISTER
                 </Button>
               </Grid>
+               
             </Grid>
           </form>
+{/* Show Login Button with Animation if Email Exists */}
+{emailExists && (
+  <motion.div
+    initial={{ opacity: 0, y: 50, scale: 0.5 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ duration: 0.5, ease: "easeOut" }} // Smooth zoom effect
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      marginTop: "20px",
+    }}
+  >
+    <Button
+      variant="contained"
+      onClick={() => navigate("/login")}
+      sx={{
+        backgroundColor: "#007BFF",
+        color: "white",
+        padding: "12px 24px",
+        borderRadius: "50px",
+        fontSize: "14px",
+        fontWeight: "bold",
+        textTransform: "none",
+        boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          backgroundColor: "#0056b3",
+          transform: "translateY(-2px) scale(1.05)",
+        },
+      }}
+    >
+      🔑 Already Registered? Login Here!
+    </Button>
+  </motion.div>
+)}
+
+
         </Paper>
+        </motion.div>
 
         {/* Snackbar for Success/Error Messages */}
         <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
