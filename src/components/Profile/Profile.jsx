@@ -1,121 +1,64 @@
 import React, { useEffect, useState } from "react";
 import { Button, Box, Typography, Avatar, TextField } from "@mui/material";
-import { Edit, UploadFile, Delete, Remove } from "@mui/icons-material";
-import axios, { Axios } from "axios";
-import { jwtDecode } from "jwt-decode";
+import { Edit, UploadFile, Delete } from "@mui/icons-material";
+import axios from "axios";
+import useUserStore from "../../store/User.store";
 
 const ProfilePage = () => {
+  const { user, getUser, updateUser, deleteUser } = useUserStore();
   const [isEditing, setIsEditing] = useState(false);
-  const [isLoding, setisLoding] = useState(false);
-  const [user, setUser] = useState({
-    confirmEmail: false,
-    email: "",
-    userName: "",
-    role: "",
-    cv: "",
-  });
-  let token = localStorage.getItem("token");
+  const [isLoading, setIsLoading] = useState(false);
+  const [updatedUser, setUpdatedUser] = useState(user);
 
-  const decodedToken = jwtDecode(token);
-
-  let updatedData;
   useEffect(() => {
     getUser();
   }, []);
 
-  const getUser = async () => {
-    let { data } = await axios.get(
-      `http://localhost:4200/api/user/${decodedToken.id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    setUser(data.user);
-  };
+  useEffect(() => {
+    setUpdatedUser(user);
+  }, [user]);
 
   const handleEdit = () => {
     setIsEditing(!isEditing);
-    update();
+    if (isEditing) updateUser(updatedUser);
   };
 
-  async function update() {
-    try {
-      await axios.put(
-        `http://localhost:4200/api/user/${decodedToken.id}`,
-        user.name,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    } catch (error) {
-      console.log("error" + error.message);
-    }
-  }
   const handleInputChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setUpdatedUser({ ...updatedUser, [e.target.name]: e.target.value });
   };
 
   const handleCVUpload = (e) => {
     const uploadedFile = e.target.files[0];
     if (uploadedFile) {
-      setUser({ ...user, cv: uploadedFile });
+      setUpdatedUser({ ...updatedUser, cv: uploadedFile });
     }
   };
 
   const handleSubmit = async () => {
-    if (!user.cv) {
-      return;
-    }
+    if (!updatedUser.cv) return;
 
     const formData = new FormData();
-    formData.append("cv", user.cv);
+    formData.append("cv", updatedUser.cv);
 
     try {
-      setisLoding(true);
+      setIsLoading(true);
       const { data } = await axios.post(
         "http://localhost:4200/api/resume/",
         formData,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
             "Content-Type": "multipart/form-data",
           },
         }
       );
 
-      setUser({ ...user, cv: data.url });
-
-      setisLoding(false);
-
-      console.log("Upload Success:", data);
+      updateUser({ ...updatedUser, cv: data.url });
+      setIsLoading(false);
     } catch (error) {
-      console.error("Upload Error:", error);
+      console.error("Upload Error:", error.response?.data || error.message);
     }
   };
-
-  async function deleteUser() {
-    try {
-      const { data } = await axios.delete(
-        `http://localhost:4200/api/user/${decodedToken.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (data.message == "User deleted successfully") {
-        console.log("go");
-      }
-      console.log(data);
-    } catch (error) {
-      console.log("error" + error.message);
-    }
-  }
 
   return (
     <Box maxWidth="lg" mx="auto" p={3}>
@@ -132,7 +75,7 @@ const ProfilePage = () => {
                 fullWidth
                 name="userName"
                 label="Full Name"
-                value={user.userName || ""}
+                value={updatedUser.userName || ""}
                 onChange={handleInputChange}
                 variant="outlined"
                 size="small"
@@ -143,40 +86,16 @@ const ProfilePage = () => {
                 Name : {user.userName || "loading"}
               </Typography>
             )}
-
-            {isEditing ? (
-              <TextField
-                fullWidth
-                disabled
-                name="email"
-                label="Email"
-                value={user.email || ""}
-                onChange={handleInputChange}
-                variant="outlined"
-                size="small"
-                sx={{ mt: 2 }}
-              />
-            ) : (
-              <Typography variant="h5" sx={{ mt: 1 }}>
-                Email : {user.email}
-              </Typography>
-            )}
-            {!isEditing ? (
-              <Typography variant="h5" fontWeight="bold" sx={{ mt: 2 }}>
-                Confirm Email:{" "}
-                {user?.confirmEmail ? "✔️ Confirmed" : "❌ Not Confirmed"}
-              </Typography>
-            ) : (
-              "."
-            )}
-            {!isEditing ? (
-              <Typography variant="h5" fontWeight="bold" sx={{ mt: 2 }}>
-                Role : {user.role}
-              </Typography>
-            ) : (
-              "."
-            )}
-
+            <Typography variant="h5" sx={{ mt: 1 }}>
+              Email : {user.email}
+            </Typography>
+            <Typography variant="h5" fontWeight="bold" sx={{ mt: 2 }}>
+              Confirm Email:{" "}
+              {user?.confirmEmail ? "✔️ Confirmed" : "❌ Not Confirmed"}
+            </Typography>
+            <Typography variant="h5" fontWeight="bold" sx={{ mt: 2 }}>
+              Role : {user.role}
+            </Typography>
             {isEditing ? (
               <Box sx={{ mt: 3 }}>
                 <input
@@ -208,7 +127,7 @@ const ProfilePage = () => {
                 >
                   Upload CV
                 </Button>
-                {isLoding ? "loading..." : "."}
+                {isLoading ? "loading..." : "."}
               </Box>
             ) : user.cv ? (
               <Box sx={{ mt: 2 }}>
