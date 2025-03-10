@@ -23,7 +23,7 @@ export default function NavBar() {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              logo
+              Home
             </Typography>
             <Button color="inherit">Login</Button>
             <Button color="inherit">SignUp</Button>
