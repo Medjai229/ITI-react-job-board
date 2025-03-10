@@ -1,12 +1,4 @@
-import "./App.css";
-import ProfilePage from "./components/profile/Profile";
-
 function App() {
-  return (
-    <>
-      <ProfilePage />;
-    </>
-  );
-}
+  return <div>Working</div>;
 
-export default App;
+export default App
