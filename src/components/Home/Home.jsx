@@ -1,51 +1,74 @@
+import { styled, alpha } from "@mui/material/styles";
 import React from "react";
-import { Box, Typography, Button, Paper } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+import { InputBase, Box } from "@mui/material";
 
 export default function Home() {
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: "50px", // Fully rounded
+    backgroundColor: alpha(theme.palette.common.white, 0.2), // Light transparent
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.common.white, 0.3),
+    },
+    width: "100%",
+    maxWidth: "450px", // Limit width
+    height: "55px",
+    display: "flex",
+    alignItems: "center",
+    padding: "0 10px",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)", // Soft shadow
+    backdropFilter: "blur(10px)", // Glassmorphism effect
+  }));
+
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    left: 5,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "#fff",
+  }));
+
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "#fff", // White text
+    width: "100%",
+    paddingLeft: theme.spacing(5),
+    "& .MuiInputBase-input": {
+      fontSize: "16px",
+      transition: theme.transitions.create("width"),
+      "&::placeholder": {
+        color: "rgba(255, 255, 255, 0.7)", // Light placeholder
+        fontSize: "14px",
+      },
+    },
+  }));
+
   return (
     <Box
       sx={{
-        minHeight: "100vh",
-        p: 4,
-        // For demonstration, let's use a basic linear gradient background
-        background: "linear-gradient(to bottom, #002855, #004aad, #0099ff)",
+        backgroundImage: `url('/landing.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        height: "90vh",
+        width: "100%",
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
+        alignItems: "flex-end", // Push search bar to bottom
+        paddingBottom: "50px", // Spacing from bottom
       }}
     >
-      <Paper
-        elevation={6}
-        sx={{
-          p: 5,
-          borderRadius: 3,
-          backgroundColor: "rgba(255,255,255,0.8)", // Slight transparency
-          textAlign: "center",
-          backdropFilter: "blur(10px)",
-          width: "100%",
-          maxWidth: 500,
-        }}
-      >
-        <Typography variant="h3" color="primary" gutterBottom>
-          Welcome to JobBoard!
-        </Typography>
-
-        <Typography variant="body1" sx={{ mb: 4 }}>
-          We're excited to help you find your next opportunity. Explore jobs,
-          post openings, or manage your career – all in one place.
-        </Typography>
-
-        {/* Example button linking to something else in your app */}
-        <Button
-          variant="contained"
-          color="secondary"
-          component={NavLink}
-          to="/home"
-        >
-          Explore More
-        </Button>
-      </Paper>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon fontSize="medium" />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Search…"
+          inputProps={{ "aria-label": "search" }}
+        />
+      </Search>
     </Box>
   );
 }
