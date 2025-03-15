@@ -23,6 +23,7 @@ export default function CompanyHome() {
   return (
     <>
       <ThemeProvider theme={theme}>
+        
         <Grid container sx={{ justifyContent: "center" }}>
           <Grid item size={{ xs: 6, md: 11 }}>
             <Box sx={{ backgroundColor: "background.default", height: 400 }}>
