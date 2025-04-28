@@ -11,7 +11,7 @@ const useJobStore = create((set) => ({
   fetchJobs: async () => {
     set({ loading: true, error: null });
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
     try {
       const response = await axios.get("http://localhost:3000/api/job/", {
         headers: {
@@ -27,7 +27,7 @@ const useJobStore = create((set) => ({
   fetchJobDetails: async (jobId) => {
     set({ loading: true, error: null, selectedJob: null });
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
     try {
       const response = await axios.get(`http://localhost:3000/api/job/${jobId}`, {
         headers: {
