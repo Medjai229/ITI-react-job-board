@@ -141,7 +141,7 @@ function JobsPage() {
                             fontSize: { xs: "1rem", sm: "1rem" },
                           }}
                         >
-                          {job.company}
+                          {job.company.name}
                         </Typography>
                       </Box>
                     </Box>
@@ -257,6 +257,8 @@ function JobsPage() {
         </>
       )}
     </Container>
+
+    
   );
 }
 

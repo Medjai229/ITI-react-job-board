@@ -91,7 +91,7 @@ function JobDetailsPage() {
                   {selectedJob.title}
                 </Typography>
                 <Typography variant="subtitle1" sx={{ color: "#AEB4C1", mb: 1 }}>
-                  {selectedJob.company}
+                  {selectedJob.company.name}
                 </Typography>
                 <Chip
                   label={selectedJob.job_type}
