@@ -64,7 +64,7 @@ export default function Login() {
         setToken(response.data.token, rememberMe);
 
         setTimeout(() => {
-          navigate("/home");
+          navigate("/");
         }, 2000);
       }
     } catch (error) {

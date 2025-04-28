@@ -35,8 +35,8 @@ export default function NavBar() {
            
             
             <Typography variant="h6" component="div" sx={{ color: "#FFFFFF",marginRight:2 }}>              
-              <Link to="/CreateJob" style={{ color: "inherit", textDecoration: "none" }}>
-              Post jop
+              <Link to="/create-job" style={{ color: "inherit", textDecoration: "none" }}>
+              Post job
               </Link>
             </Typography>
 
