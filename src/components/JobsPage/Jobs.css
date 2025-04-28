@@ -1,0 +1,51 @@
+.jobs-area {
+  background-color: #f8f8fd;
+}
+
+.main-title {
+  color: #25324b;
+}
+
+.main-title span {
+  color: #26a4ff;
+}
+
+.jobs-area .job-card {
+  transition: 0.3s;
+}
+
+.jobs-area .job-card:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.job-card .job-title {
+  color: #25324B;
+}
+
+.jobs-area .job-card .info {
+  color: #515b6f;
+}
+
+.job-card .tags .type,
+.job-card .tags .status {
+  padding: 7px 15px;
+  border-radius: 20px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.job-card .tags .type::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 2px;
+  background-color: #D6DDEB;
+  top: 0;
+  right: -10px;
+}
+
+.job-card .tags .status {
+  color: #4640DE;
+  border: 1px solid #4640DE;
+  padding: 7px 25px;
+}
