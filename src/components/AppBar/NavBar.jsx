@@ -39,7 +39,7 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li className="nav-item ">
-                  <Link to="/sign-up" className="nav-link text-white">
+                  <Link to="/register" className="nav-link text-white">
                     Sign Up
                   </Link>
                 </li>
