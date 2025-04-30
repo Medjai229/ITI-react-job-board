@@ -1,67 +1,53 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import logo from "./../../assets/Logo 1.png";
 
 export default function NavBar() {
   return (
     <>
-      <Box sx={{ flexGrow: 1 ,backgroundColor:"#1A75E8"}}>
-        <AppBar position="static">
-          <Toolbar sx={{ mr: 4,marginLeft:13,marginRight:13 }}
-          >
+      <div style={{ backgroundColor: "#4640DE" }}>
+        <nav className="navbar navbar-expand-lg navbar-light">
+          <div className="container">
+            {/* Logo on the left side */}
+            <Link to="/" className="navbar-brand">
+              <img src={logo} alt="Logo" style={{ width: "150px" }} />
+            </Link>
 
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-        
-            
-            <Typography variant="h6" component="div" sx={{flexGrow: 1, color: "#FFFFFF" ,marginRight:2}}>              
-              <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-              Home
-              </Link>
-            </Typography>
-
-
-           
-            
-            <Typography variant="h6" component="div" sx={{ color: "#FFFFFF",marginRight:2 }}>              
-              <Link to="/create-job" style={{ color: "inherit", textDecoration: "none" }}>
-              Post job
-              </Link>
-            </Typography>
-
-            <Typography variant="h6" component="div" sx={{ color: "#FFFFFF",marginRight:2 }}>              
-              <Link to="/CompanyHome" style={{ color: "inherit", textDecoration: "none" }}>
-              Companies
-              </Link>
-            </Typography>
-
-            <Typography variant="h6" component="div" sx={{ color: "#FFFFFF" ,marginRight:2}}>              
-              <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
-                Login
-              </Link>
-            </Typography>
-            
-            <Typography variant="h6" component="div" sx={{ color: "#FFFFFF",marginRight:2 }}>              
-              <Link to="/login" style={{ color: "inherit", textDecoration: "none" }}>
-              Sign Up
-              </Link>
-            </Typography>
-        
-          </Toolbar>
-          
-        </AppBar>
-      </Box>
+            {/* Navbar links on the right */}
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav" style={{}}>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link text-white">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/create-job" className="nav-link text-white">
+                    Post Job
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/CompanyHome" className="nav-link text-white">
+                    Companies
+                  </Link>
+                </li>
+              </ul>
+              <ul className="navbar-nav ms-auto">
+                <li className="nav-item  ">
+                  <Link to="/login" className="nav-link text-white">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item ">
+                  <Link to="/sign-up" className="nav-link text-white">
+                    Sign Up
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
     </>
   );
 }

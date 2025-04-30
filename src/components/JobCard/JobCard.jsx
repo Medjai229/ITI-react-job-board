@@ -36,7 +36,7 @@ function JobCard({ job }) {
       <div className="job-card bg-white py-4 px-5">
         <h3 className="job-title">{job.title}</h3>
         <div className="info d-flex gap-2 fs-5">
-          <p className="comp-name">{job.company.name}</p>
+          <p className="comp-name">{job.company?.name}</p>
           <span className="fw-bold">.</span>
           <p className="address">{job.location}</p>
         </div>
