@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 
 import "./Jobs.css";
 import JobCard from "../JobCard/JobCard";
+import JobSearch from "../JobSearch/JobSearch";
 
 function JobsPage() {
   const { jobs, loading, error, fetchJobs } = useJobStore();
@@ -51,65 +52,85 @@ function JobsPage() {
     setCurrentPage(value);
   };
 
+  let popularSearch = [
+    "Graphic Designer",
+    "UI/UX",
+    "Web Developer",
+    "Copywriter",
+    "Front-End Developer",
+  ];
+
   return (
     <>
-      <div className="jobs mt-3">
+      <div className="jobs">
+        <div className="explore w-100">
+          <div className="container py-5">
+            <p className="exp">Explore Best Job Opportunities</p>
+            <h2 className="emp">Empower 
+              <br></br>
+              Your Career</h2>
+            <p className="desc">
+              Discover your next career move with JobLinkup, the go-to job
+              <br></br>
+              marketplace for job seekers and employers.
+            </p>
+            <JobSearch />
+            <div className="popularSearch">
+              <p className="fw-bold mt-3 mb-2">Popular Search:</p>
+              <div className="tags d-flex flex-wrap gap-3">
+              {popularSearch.map((search)=> <div className="searchTag">{search}</div>)}
+              </div>
 
-        <div className="container">
-
-          <div className="explore">
-            <img src="/public/jobsBannar.png" alt="" className="w-100" />
+            </div>
+          
           </div>
-
         </div>
         <div className="jobs-area">
-
           <div className="container">
-
             <h2 className="py-5 fs-1 main-title">
               Latest <span>Open Jobs</span>
             </h2>
 
             <div className="jobs pb-5">
-
               <div className="row g-4">
-
-                {currentJobs.map((job)=> <JobCard key={job._id} job={job} />)}
-
+                {currentJobs.map((job) => (
+                  <JobCard key={job._id} job={job} />
+                ))}
               </div>
 
               <div className="row">
-              {jobs.length > jobsPerPage && (
-              <Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-                <Pagination
-                  count={totalPages}
-                  page={currentPage}
-                  size="large"
-                  onChange={handlePageChange}
-                  variant="outlined"
-                  shape="rounded"
-                  sx={{
-                    "& .MuiPaginationItem-root": {
-                      borderColor: "#AEB4C1",
-                    },
-                    "& .MuiPaginationItem-root.Mui-selected": {
-                      backgroundColor: "#4640DE",
-                      color: "#fff",
-                      borderColor: "#4640DE",
-                      "&:hover": {
-                        backgroundColor: "#4640DE",
-                      },
-                    },
-                    "& .MuiPaginationItem-root:hover": {
-                      borderColor: "#4640DE",
-                      backgroundColor: "#4640DE1A",
-                    },
-                  }}
-                />
-              </Box>
-            )}
+                {jobs.length > jobsPerPage && (
+                  <Box
+                    sx={{ display: "flex", justifyContent: "center", mt: 4 }}
+                  >
+                    <Pagination
+                      count={totalPages}
+                      page={currentPage}
+                      size="large"
+                      onChange={handlePageChange}
+                      variant="outlined"
+                      shape="rounded"
+                      sx={{
+                        "& .MuiPaginationItem-root": {
+                          borderColor: "#AEB4C1",
+                        },
+                        "& .MuiPaginationItem-root.Mui-selected": {
+                          backgroundColor: "#4640DE",
+                          color: "#fff",
+                          borderColor: "#4640DE",
+                          "&:hover": {
+                            backgroundColor: "#4640DE",
+                          },
+                        },
+                        "& .MuiPaginationItem-root:hover": {
+                          borderColor: "#4640DE",
+                          backgroundColor: "#4640DE1A",
+                        },
+                      }}
+                    />
+                  </Box>
+                )}
               </div>
-
             </div>
           </div>
         </div>
