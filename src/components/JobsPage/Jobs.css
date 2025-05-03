@@ -20,6 +20,15 @@
   font-weight: 900;
 }
 
+@media (max-width: 768px) {
+  .jobs .emp {
+    font-size: 40px;
+  }
+  .jobs .explore .container {
+    background-image: none;
+  }
+}
+
 .jobs .desc {
   color: #515b6f;
 }
