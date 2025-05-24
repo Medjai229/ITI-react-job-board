@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import HeroSection from "../HeroSection/HeroSection";
 import JobCard from "../JobCard/JobCard";
 import useJobStore from "../../store/useJobsStore";
+import JobsHero from "../JobsHero/JobsHero";
 
 export default function Home() {
   const { jobs, loading, error, fetchJobs } = useJobStore();
@@ -12,7 +13,9 @@ export default function Home() {
 
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection /> */}
+      {}
+      <JobsHero />
 
       <div className="container">
         <h1 style={{ fontSize: "50px" }} className="mx-5">
