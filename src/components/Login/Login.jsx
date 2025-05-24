@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
+
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -145,7 +147,6 @@ export default function Login() {
               >
                 Log in to your account
               </Typography>
-
               {/* Email */}
               <TextField
                 placeholder="Email Address"
@@ -162,7 +163,6 @@ export default function Login() {
                 sx={{ mb: 4 }}
                 InputProps={{ disableUnderline: false }}
               />
-
               {/* Password */}
               <TextField
                 placeholder="Password"
@@ -195,7 +195,14 @@ export default function Login() {
                 }}
                 sx={{ mb: 4 }}
               />
-
+              <span className="d"> Don’t have an account? </span>
+              <Link
+                to="/register"
+                className="text-primary text-decoration-none"
+              >
+                Register here
+              </Link>
+              <br />
               {/* Remember me */}
               <FormControlLabel
                 control={
@@ -209,7 +216,6 @@ export default function Login() {
                 label="Remember Me"
                 sx={{ mb: 3 }}
               />
-
               {/* Submit */}
               <Button
                 type="submit"
@@ -234,28 +240,7 @@ export default function Login() {
             </form>
 
             {emailNotFound && (
-              <Box mt={3} textAlign="center" minHeight="60px">
-                <Button
-                  onClick={() => navigate("/register")}
-                  fullWidth
-                  variant="outlined"
-                  sx={{
-                    borderRadius: "999px",
-                    fontWeight: "bold",
-                    py: 1,
-                    mt: 1,
-                    color: "#4C4CF1",
-                    borderColor: "#4C4CF1",
-                    textTransform: "none",
-                    "&:hover": {
-                      backgroundColor: "#f0f3ff",
-                      borderColor: "#4C4CF1",
-                    },
-                  }}
-                >
-                  🆕 No Account? Register Here!
-                </Button>
-              </Box>
+              <Box mt={3} textAlign="center" minHeight="60px"></Box>
             )}
           </Box>
         </Box>

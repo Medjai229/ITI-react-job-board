@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
+import { Link } from "react-router-dom";
+
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -165,7 +167,6 @@ export default function Register() {
                     }
                   />
                 </Grid>
-
                 {/* Email Field */}
                 <Grid item xs={12}>
                   <TextField
@@ -184,7 +185,6 @@ export default function Register() {
                     }
                   />
                 </Grid>
-
                 {/* Role Dropdown */}
                 <Grid item xs={12}>
                   <FormControl fullWidth>
@@ -201,7 +201,6 @@ export default function Register() {
                     </Select>
                   </FormControl>
                 </Grid>
-
                 {/* Password Field */}
                 <Grid item xs={12}>
                   <TextField
@@ -234,7 +233,6 @@ export default function Register() {
                     }}
                   />
                 </Grid>
-
                 {/* Confirm Password Field */}
                 <Grid item xs={12}>
                   <TextField
@@ -273,7 +271,11 @@ export default function Register() {
                     }}
                   />
                 </Grid>
+                <span className="ms-3"> Don’t have an account?</span>
 
+                <Link to="/login" className="text-primary text-decoration-none">
+                  Login here
+                </Link>
                 {/* Submit Button */}
                 <Grid item xs={12}>
                   <Button
@@ -298,29 +300,7 @@ export default function Register() {
                   justifyContent: "center",
                   marginTop: "20px",
                 }}
-              >
-                <Button
-                  variant="contained"
-                  onClick={() => navigate("/login")}
-                  sx={{
-                    backgroundColor: "#007BFF",
-                    color: "white",
-                    padding: "12px 24px",
-                    borderRadius: "50px",
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                    textTransform: "none",
-                    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
-                    transition: "all 0.3s ease-in-out",
-                    "&:hover": {
-                      backgroundColor: "#0056b3",
-                      transform: "translateY(-2px) scale(1.05)",
-                    },
-                  }}
-                >
-                  🔑 Already Registered? Login Here!
-                </Button>
-              </motion.div>
+              ></motion.div>
             )}
           </Paper>
         </motion.div>
