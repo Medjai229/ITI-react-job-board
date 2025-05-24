@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 import logo from "./../../assets/Logo 1.png";
 
 export default function NavBar() {
-  const token = localStorage.getItem("UserToken");
+  let token = localStorage.getItem("UserToken");
+  if (!token) {
+    token = sessionStorage.getItem("UserToken");
+  }
 
   return (
     <>
