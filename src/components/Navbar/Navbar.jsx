@@ -21,8 +21,7 @@ const Navbar = () => {
               color="inherit"
               onClick={() => {
                 logout();
-                navigate("/login");  // Redirect after logout
-
+                navigate("/login"); // Redirect after logout
               }}
             >
               Logout

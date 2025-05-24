@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import logo from "./../../assets/Logo 1.png";
 
 export default function NavBar() {
+  const token = localStorage.getItem("UserToken");
+
   return (
     <>
       <div style={{ backgroundColor: "#4640DE" }}>
@@ -32,18 +34,43 @@ export default function NavBar() {
                   </Link>
                 </li>
               </ul>
-              <ul className="navbar-nav ms-auto">
-                <li className="nav-item  ">
-                  <Link to="/login" className="nav-link text-white">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item ">
-                  <Link to="/register" className="nav-link text-white">
-                    Sign Up
-                  </Link>
-                </li>
-              </ul>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav ms-auto">
+                  {token ? (
+                    <>
+                      <li className="nav-item">
+                        <Link to="/profile" className="nav-link text-white">
+                          Profile
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link
+                          to="/login"
+                          className="nav-link btn btn-link text-white"
+                          onClick={() => {
+                            localStorage.removeItem("UserToken");
+                          }}
+                        >
+                          Log Out
+                        </Link>
+                      </li>
+                    </>
+                  ) : (
+                    <>
+                      <li className="nav-item">
+                        <Link to="/login" className="nav-link text-white">
+                          Login
+                        </Link>
+                      </li>
+                      <li className="nav-item">
+                        <Link to="/register" className="nav-link text-white">
+                          Sign Up
+                        </Link>
+                      </li>
+                    </>
+                  )}
+                </ul>
+              </div>
             </div>
           </div>
         </nav>

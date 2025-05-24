@@ -37,15 +37,22 @@ export default function Login() {
   };
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string().email("Invalid email address").required("Email is required"),
-    password: Yup.string().min(8, "Password must be at least 8 characters long").required("Password is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters long")
+      .required("Password is required"),
   });
 
   async function login(values, { setSubmitting }) {
     try {
       setEmailNotFound(false);
       const { email, password, rememberMe } = values;
-      const response = await axios.post("http://localhost:3000/api/auth/login", { email, password });
+      const response = await axios.post(
+        "http://localhost:4200/api/auth/login",
+        { email, password }
+      );
 
       if (response.status === 200) {
         setSnackbarMessage("🎉 Login successful! Redirecting...");
@@ -86,7 +93,14 @@ export default function Login() {
   return (
     <>
       <CssBaseline />
-      <Box sx={{ display: "flex",  overflow: "hidden", backgroundColor: "#f5f7ff", height: "100vh" }}>
+      <Box
+        sx={{
+          display: "flex",
+          overflow: "hidden",
+          backgroundColor: "#f5f7ff",
+          height: "100vh",
+        }}
+      >
         {/* Left Half - Image */}
         <Box
           sx={{
@@ -100,7 +114,7 @@ export default function Login() {
           <img
             src={leftIllustration}
             alt="Illustration"
-            style={{ width: "100%", height: "100%", objectFit: "cover"  }}
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
         </Box>
 
@@ -115,14 +129,19 @@ export default function Login() {
             px: 10,
           }}
         >
-          <Box sx={{ width: "100%", maxWidth: 800}}>
+          <Box sx={{ width: "100%", maxWidth: 800 }}>
             <form onSubmit={loginForm.handleSubmit}>
               {/* Clean heading without card */}
               <Typography
                 variant="h5"
                 fontWeight="500"
                 mb={7}
-                sx={{ fontSize: "32px" ,fontWeight:"bold", textTransform: "capitalize", color: "#0062FF" }}
+                sx={{
+                  fontSize: "32px",
+                  fontWeight: "bold",
+                  textTransform: "capitalize",
+                  color: "#0062FF",
+                }}
               >
                 Log in to your account
               </Typography>
@@ -136,7 +155,9 @@ export default function Login() {
                 value={loginForm.values.email}
                 onChange={loginForm.handleChange}
                 onBlur={loginForm.handleBlur}
-                error={loginForm.touched.email && Boolean(loginForm.errors.email)}
+                error={
+                  loginForm.touched.email && Boolean(loginForm.errors.email)
+                }
                 helperText={loginForm.touched.email && loginForm.errors.email}
                 sx={{ mb: 4 }}
                 InputProps={{ disableUnderline: false }}
@@ -152,13 +173,21 @@ export default function Login() {
                 value={loginForm.values.password}
                 onChange={loginForm.handleChange}
                 onBlur={loginForm.handleBlur}
-                error={loginForm.touched.password && Boolean(loginForm.errors.password)}
-                helperText={loginForm.touched.password && loginForm.errors.password}
+                error={
+                  loginForm.touched.password &&
+                  Boolean(loginForm.errors.password)
+                }
+                helperText={
+                  loginForm.touched.password && loginForm.errors.password
+                }
                 InputProps={{
                   disableUnderline: false,
                   endAdornment: (
                     <InputAdornment position="end">
-                      <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        edge="end"
+                      >
                         {showPassword ? <VisibilityOff /> : <Visibility />}
                       </IconButton>
                     </InputAdornment>
@@ -184,7 +213,7 @@ export default function Login() {
               {/* Submit */}
               <Button
                 type="submit"
-                fullWidth 
+                fullWidth
                 variant="contained"
                 disabled={loginForm.isSubmitting}
                 sx={{
@@ -232,8 +261,16 @@ export default function Login() {
         </Box>
       </Box>
 
-      <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
-        <MuiAlert onClose={() => setOpenSnackbar(false)} severity={snackbarSeverity} sx={{ width: "100%" }}>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+      >
+        <MuiAlert
+          onClose={() => setOpenSnackbar(false)}
+          severity={snackbarSeverity}
+          sx={{ width: "100%" }}
+        >
           {snackbarMessage}
         </MuiAlert>
       </Snackbar>

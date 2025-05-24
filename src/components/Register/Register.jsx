@@ -3,11 +3,26 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import {TextField,Button,Select,MenuItem,InputLabel,FormControl,Typography,Grid,Paper,Alert,IconButton,InputAdornment,Snackbar,CssBaseline,Box,} from "@mui/material";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Typography,
+  Grid,
+  Paper,
+  Alert,
+  IconButton,
+  InputAdornment,
+  Snackbar,
+  CssBaseline,
+  Box,
+} from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import MuiAlert from "@mui/material/Alert";
 import { motion } from "framer-motion"; // Import motion for animation
-
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,7 +49,9 @@ export default function Register() {
       .min(3, "Name should be at least 3 characters long")
       .max(29, "Name should be at most 29 characters long")
       .required("Name is required"),
-    email: Yup.string().email("Invalid email address").required("Email is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     password: Yup.string()
       .min(8, "Password should be at least 8 characters long")
       .matches(
@@ -47,14 +64,19 @@ export default function Register() {
       .required("Confirm password is required"),
     role: Yup.string().oneOf(["job_seeker", "employer"]).default("job_seeker"),
   });
-  
+
   async function register(values, { setSubmitting }) {
     try {
       setApiError(null);
-      setEmailExists(false);//Reset email existence state before submitting
-      let response = await axios.post("http://localhost:3000/api/auth/signUp", values);
+      setEmailExists(false); //Reset email existence state before submitting
+      let response = await axios.post(
+        "http://localhost:4200/api/auth/signUp",
+        values
+      );
       if (response.status === 200) {
-        setSnackbarMessage("🎉 Registration successful! Redirecting to login...");
+        setSnackbarMessage(
+          "🎉 Registration successful! Redirecting to login..."
+        );
         setOpenSnackbar(true);
         setTimeout(() => {
           navigate("/login");
@@ -63,7 +85,8 @@ export default function Register() {
     } catch (error) {
       console.error("Registration error:", error.message);
       if (error.response) {
-        const errorMessage = error.response.data.message || "Something went wrong";
+        const errorMessage =
+          error.response.data.message || "Something went wrong";
 
         setApiError(errorMessage);
 
@@ -88,7 +111,7 @@ export default function Register() {
   return (
     <>
       <CssBaseline />
-      
+
       {/* Styled Background */}
       <Box
         sx={{
@@ -100,174 +123,219 @@ export default function Register() {
           padding: 2,
         }}
       >
-         <motion.div
+        <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-        <Paper
-          elevation={6}
-          sx={{
-            padding: 5,
-            borderRadius: 3,
-            backgroundColor: "white",
-            width: "100%",
-            maxWidth: 450,
-            textAlign: "center",
-            boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)",
-          }}
-        >
-          <Typography variant="h4" gutterBottom color="primary">
-            Register
-          </Typography>
-          {apiError && <Alert severity="error">{apiError}</Alert>}
-          <form onSubmit={registerForm.handleSubmit}>
-            <Grid container spacing={2}>
-              {/* Name Field */}
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Full Name"
-                  name="userName"
-                  value={registerForm.values.userName}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                  error={registerForm.touched.userName && Boolean(registerForm.errors.userName)}
-                  helperText={registerForm.touched.userName && registerForm.errors.userName}
-                />
-              </Grid>
-
-              {/* Email Field */}
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Email Address"
-                  name="email"
-                  value={registerForm.values.email}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                  error={registerForm.touched.email && Boolean(registerForm.errors.email)}
-                  helperText={registerForm.touched.email && registerForm.errors.email}
-                />
-              </Grid>
-
-              {/* Role Dropdown */}
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel>Role</InputLabel>
-                  <Select
-                    name="role"
-                    value={registerForm.values.role}
+          <Paper
+            elevation={6}
+            sx={{
+              padding: 5,
+              borderRadius: 3,
+              backgroundColor: "white",
+              width: "100%",
+              maxWidth: 450,
+              textAlign: "center",
+              boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.2)",
+            }}
+          >
+            <Typography variant="h4" gutterBottom color="primary">
+              Register
+            </Typography>
+            {apiError && <Alert severity="error">{apiError}</Alert>}
+            <form onSubmit={registerForm.handleSubmit}>
+              <Grid container spacing={2}>
+                {/* Name Field */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Full Name"
+                    name="userName"
+                    value={registerForm.values.userName}
                     onChange={registerForm.handleChange}
                     onBlur={registerForm.handleBlur}
-                    label ="Role"
+                    error={
+                      registerForm.touched.userName &&
+                      Boolean(registerForm.errors.userName)
+                    }
+                    helperText={
+                      registerForm.touched.userName &&
+                      registerForm.errors.userName
+                    }
+                  />
+                </Grid>
+
+                {/* Email Field */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Email Address"
+                    name="email"
+                    value={registerForm.values.email}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                    error={
+                      registerForm.touched.email &&
+                      Boolean(registerForm.errors.email)
+                    }
+                    helperText={
+                      registerForm.touched.email && registerForm.errors.email
+                    }
+                  />
+                </Grid>
+
+                {/* Role Dropdown */}
+                <Grid item xs={12}>
+                  <FormControl fullWidth>
+                    <InputLabel>Role</InputLabel>
+                    <Select
+                      name="role"
+                      value={registerForm.values.role}
+                      onChange={registerForm.handleChange}
+                      onBlur={registerForm.handleBlur}
+                      label="Role"
+                    >
+                      <MenuItem value="job_seeker">Job Seeker</MenuItem>
+                      <MenuItem value="employer">Employer</MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                {/* Password Field */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={registerForm.values.password}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                    error={
+                      registerForm.touched.password &&
+                      Boolean(registerForm.errors.password)
+                    }
+                    helperText={
+                      registerForm.touched.password &&
+                      registerForm.errors.password
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() => setShowPassword(!showPassword)}
+                            edge="end"
+                          >
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+
+                {/* Confirm Password Field */}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    label="Confirm Password"
+                    name="confirmedPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={registerForm.values.confirmedPassword}
+                    onChange={registerForm.handleChange}
+                    onBlur={registerForm.handleBlur}
+                    error={
+                      registerForm.touched.confirmedPassword &&
+                      Boolean(registerForm.errors.confirmedPassword)
+                    }
+                    helperText={
+                      registerForm.touched.confirmedPassword &&
+                      registerForm.errors.confirmedPassword
+                    }
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <IconButton
+                            onClick={() =>
+                              setShowConfirmPassword(!showConfirmPassword)
+                            }
+                            edge="end"
+                          >
+                            {showConfirmPassword ? (
+                              <VisibilityOff />
+                            ) : (
+                              <Visibility />
+                            )}
+                          </IconButton>
+                        </InputAdornment>
+                      ),
+                    }}
+                  />
+                </Grid>
+
+                {/* Submit Button */}
+                <Grid item xs={12}>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
                   >
-                    <MenuItem value="job_seeker">Job Seeker</MenuItem>
-                    <MenuItem value="employer">Employer</MenuItem>
-                  </Select>
-                </FormControl>
+                    REGISTER
+                  </Button>
+                </Grid>
               </Grid>
-
-              {/* Password Field */}
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  value={registerForm.values.password}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                  error={registerForm.touched.password && Boolean(registerForm.errors.password)}
-                  helperText={registerForm.touched.password && registerForm.errors.password}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={() => setShowPassword(!showPassword)} edge="end">
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
+            </form>
+            {/* Show Login Button with Animation if Email Exists */}
+            {emailExists && (
+              <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.5 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }} // Smooth zoom effect
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  marginTop: "20px",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  onClick={() => navigate("/login")}
+                  sx={{
+                    backgroundColor: "#007BFF",
+                    color: "white",
+                    padding: "12px 24px",
+                    borderRadius: "50px",
+                    fontSize: "14px",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
+                    transition: "all 0.3s ease-in-out",
+                    "&:hover": {
+                      backgroundColor: "#0056b3",
+                      transform: "translateY(-2px) scale(1.05)",
+                    },
                   }}
-                />
-              </Grid>
-
-              {/* Confirm Password Field */}
-              <Grid item xs={12}>
-                <TextField
-                  fullWidth
-                  label="Confirm Password"
-                  name="confirmedPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  value={registerForm.values.confirmedPassword}
-                  onChange={registerForm.handleChange}
-                  onBlur={registerForm.handleBlur}
-                  error={registerForm.touched.confirmedPassword && Boolean(registerForm.errors.confirmedPassword)}
-                  helperText={registerForm.touched.confirmedPassword && registerForm.errors.confirmedPassword}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <IconButton onClick={() => setShowConfirmPassword(!showConfirmPassword)} edge="end">
-                          {showConfirmPassword ? <VisibilityOff /> : <Visibility />}
-                        </IconButton>
-                      </InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-
-              {/* Submit Button */}
-              <Grid item xs={12}>
-                <Button type="submit" fullWidth variant="contained" color="primary">
-                  REGISTER
+                >
+                  🔑 Already Registered? Login Here!
                 </Button>
-              </Grid>
-               
-            </Grid>
-          </form>
-{/* Show Login Button with Animation if Email Exists */}
-{emailExists && (
-  <motion.div
-    initial={{ opacity: 0, y: 50, scale: 0.5 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ duration: 0.5, ease: "easeOut" }} // Smooth zoom effect
-    style={{
-      display: "flex",
-      justifyContent: "center",
-      marginTop: "20px",
-    }}
-  >
-    <Button
-      variant="contained"
-      onClick={() => navigate("/login")}
-      sx={{
-        backgroundColor: "#007BFF",
-        color: "white",
-        padding: "12px 24px",
-        borderRadius: "50px",
-        fontSize: "14px",
-        fontWeight: "bold",
-        textTransform: "none",
-        boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.3)",
-        transition: "all 0.3s ease-in-out",
-        "&:hover": {
-          backgroundColor: "#0056b3",
-          transform: "translateY(-2px) scale(1.05)",
-        },
-      }}
-    >
-      🔑 Already Registered? Login Here!
-    </Button>
-  </motion.div>
-)}
-
-
-        </Paper>
+              </motion.div>
+            )}
+          </Paper>
         </motion.div>
 
         {/* Snackbar for Success/Error Messages */}
-        <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={() => setOpenSnackbar(false)}>
-          <MuiAlert onClose={() => setOpenSnackbar(false)} severity={apiError ? "error" : "success"} sx={{ width: "100%" }}>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={() => setOpenSnackbar(false)}
+        >
+          <MuiAlert
+            onClose={() => setOpenSnackbar(false)}
+            severity={apiError ? "error" : "success"}
+            sx={{ width: "100%" }}
+          >
             {snackbarMessage}
           </MuiAlert>
         </Snackbar>

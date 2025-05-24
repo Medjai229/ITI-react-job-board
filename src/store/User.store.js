@@ -12,7 +12,7 @@ const useUserStore = create((set) => ({
   },
 
   getUser: async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
     if (!token) return console.error("No token found");
 
     const decodedToken = jwtDecode(token);
@@ -35,7 +35,7 @@ const useUserStore = create((set) => ({
   },
 
   updateUser: async (updatedData) => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
     if (!token) return console.error("No token found");
 
     const decodedToken = jwtDecode(token);
@@ -62,7 +62,7 @@ const useUserStore = create((set) => ({
   },
 
   deleteUser: async () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
     if (!token) return console.error("No token found");
 
     const decodedToken = jwtDecode(token);
@@ -78,7 +78,7 @@ const useUserStore = create((set) => ({
       if (data.message === "User deleted successfully") {
         console.log("User deleted");
         set({ user: {} });
-        localStorage.removeItem("token");
+        localStorage.removeItem("UserToken");
       }
     } catch (error) {
       console.error(

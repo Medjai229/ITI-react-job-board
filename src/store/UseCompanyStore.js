@@ -12,7 +12,7 @@ const useCompanyStore = create((set) => ({
     const token = localStorage.getItem("UserToken");
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/companies/display",
+        "http://localhost:4200/api/companies/display",
         {
           headers: {
             Authorization: `Bearer${token}`,
@@ -20,17 +20,11 @@ const useCompanyStore = create((set) => ({
         }
       );
 
-      set({companies:res.data,isLoading:false})
+      set({ companies: res.data, isLoading: false });
     } catch (error) {
-        set({error,isLoading:false})
+      set({ error, isLoading: false });
     }
   },
 
-
-  getCompanyBydetails
-
-
-
-
-
+  getCompanyBydetails,
 }));

@@ -47,7 +47,7 @@ const ProfilePage = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
             "Content-Type": "multipart/form-data",
           },
         }
