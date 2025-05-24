@@ -12,8 +12,10 @@ const useUserStore = create((set) => ({
   },
 
   getUser: async () => {
-    const token = localStorage.getItem("UserToken");
-    if (!token) return console.error("No token found");
+    let token = localStorage.getItem("UserToken");
+    if (!token) {
+      token = sessionStorage.getItem("UserToken");
+    }
 
     const decodedToken = jwtDecode(token);
     console.log("Decoded Token:", decodedToken);
