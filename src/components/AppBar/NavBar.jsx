@@ -61,7 +61,8 @@ export default function NavBar() {
                           to="/login"
                           className="nav-link btn btn-link text-white"
                           onClick={() => {
-                            localStorage.removeItem("UserToken");
+                            localStorage.removeItem("UserToken") &&
+                              sessionStorage.removeItem("UserToken");
                           }}
                         >
                           Log Out
