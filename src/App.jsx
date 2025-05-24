@@ -7,7 +7,7 @@ import JobsPage from "./components/JobsPage/JobsPage";
 import Login from "./components/Login/Login";
 import ProfilePage from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
-import Layout from "./components/layout/Layout";
+import Layout from "./components/Layout/Layout";
 
 function App() {
   return(
