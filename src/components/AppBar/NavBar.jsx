@@ -35,7 +35,7 @@ export default function NavBar() {
                 </li>
                 <li className="nav-item">
                   <Link to="/jobs" className="nav-link text-white">
-                    All Job
+                    All Jobs
                   </Link>
                 </li>
                 {user?.role === "employer" && (

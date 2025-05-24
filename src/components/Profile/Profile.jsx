@@ -127,7 +127,7 @@ const ProfilePage = () => {
                 >
                   Upload CV
                 </Button>
-                {isLoading ? "loading..." : "."}
+                {isLoading ? "loading..." : ""}
               </Box>
             ) : user.cv ? (
               <Box sx={{ mt: 2 }}>
