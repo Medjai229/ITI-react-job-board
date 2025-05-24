@@ -28,7 +28,7 @@ export default function NavBar() {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/job" className="nav-link text-white">
+                  <Link to="/jobs" className="nav-link text-white">
                     All Job
                   </Link>
                 </li>
