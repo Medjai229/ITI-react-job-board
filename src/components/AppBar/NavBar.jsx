@@ -4,12 +4,17 @@ import logo from "./../../assets/Logo 1.png";
 import useUserStore from "../../store/User.store";
 
 export default function NavBar() {
-  const { user } = useUserStore();
+  const { user, getUser } = useUserStore();
 
   let token = localStorage.getItem("UserToken");
   if (!token) {
     token = sessionStorage.getItem("UserToken");
   }
+  React.useEffect(() => {
+    if (token) {
+      getUser();
+    }
+  }, [token, getUser]);
 
   return (
     <>
