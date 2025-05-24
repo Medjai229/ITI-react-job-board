@@ -27,6 +27,11 @@ export default function NavBar() {
                     Home
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/job" className="nav-link text-white">
+                    All Job
+                  </Link>
+                </li>
                 {user?.role === "employer" && (
                   <li className="nav-item">
                     <Link to="/create-job" className="nav-link text-white">
