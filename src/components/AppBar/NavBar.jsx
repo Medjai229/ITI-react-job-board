@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import logo from "./../../assets/Logo 1.png";
 import useUserStore from "../../store/User.store";
 import { useEffect } from "react";
+import './NavBar.css'
 
 export default function NavBar() {
   const { user, getUser } = useUserStore();
