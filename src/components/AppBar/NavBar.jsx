@@ -40,9 +40,16 @@ export default function NavBar() {
                     </Link>
                   </li>
                 )}
+                {user?.role === "job_seeker" && (
+                  <li className="nav-item">
+                    <Link to="/jobs" className="nav-link text-white">
+                      Find Jobs
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Link to="/CompanyHome" className="nav-link text-white">
-                    Companies
+                    Browse Companies
                   </Link>
                 </li>
               </ul>
