@@ -8,17 +8,19 @@ import Login from "./components/Login/Login";
 import ProfilePage from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import Layout from "./components/Layout/Layout";
+import './assets/fonts/clash-display.css';
 
 function App() {
   return (
     <>
       <Routes>
         <Route element={<Layout />}>
-          <Route index element={<JobsPage />} />
+          <Route index element={<Home />} />
           <Route path="create-job" element={<CreateJob />} />
+          <Route path="jobs" element={<JobsPage />} />
           <Route path="job/:id" element={<JobDetailsPage />} />
           <Route path="Profile" element={<ProfilePage />} />
-          <Route path="CompanyHome" element={<CompanyHome />} />
+          <Route path="CompanyHome" element={<CompanyHome />} />{" "}
         </Route>
 
         <Route path="register" element={<Register />} />
