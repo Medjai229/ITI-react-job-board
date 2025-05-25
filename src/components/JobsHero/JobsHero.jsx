@@ -25,7 +25,7 @@ function JobsHero() {
                 <div className="popularSearch">
                   <p className="fw-bold mt-3 mb-2">Popular Search:</p>
                   <div className="tags d-flex flex-wrap gap-3">
-                  {popularSearch.map((search)=> <div className="searchTag">{search}</div>)}
+                  {popularSearch.map((search,index)=> <div className="searchTag" key={index}>{search}</div>)}
                   </div>
     
                 </div>

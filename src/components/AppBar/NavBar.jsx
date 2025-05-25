@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import logo from "./../../assets/Logo 1.png";
 import useUserStore from "../../store/User.store";
