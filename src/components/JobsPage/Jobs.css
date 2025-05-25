@@ -3,7 +3,7 @@
 }
 
 .explore .container {
-  background-image: url(/public/man.png);
+  background-image: url(../../assets/man.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
