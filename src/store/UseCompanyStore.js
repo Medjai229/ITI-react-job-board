@@ -12,7 +12,7 @@ import axios from "axios";
 
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/companies/display",
+        "http://localhost:4200/api/companies/display",
         {
           headers: {
             Authorization: `Bearer${token}`,

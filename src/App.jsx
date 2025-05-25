@@ -7,28 +7,24 @@ import JobsPage from "./components/JobsPage/JobsPage";
 import Login from "./components/Login/Login";
 import ProfilePage from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
-import Layout from "./components/layout/Layout";
+import Layout from "./components/Layout/Layout";
 
 function App() {
-  return(
+  return (
     <>
-    <Routes>
+      <Routes>
+        <Route element={<Layout />}>
+          <Route index element={<JobsPage />} />
+          <Route path="create-job" element={<CreateJob />} />
+          <Route path="job/:id" element={<JobDetailsPage />} />
+          <Route path="Profile" element={<ProfilePage />} />
+          <Route path="CompanyHome" element={<CompanyHome />} />
+        </Route>
 
-      <Route element={<Layout/>}>
-        <Route index element={<Home/>} />
-        <Route path="create-job" element={<CreateJob/>} />
-        <Route path="jobs" element={<JobsPage/>} />
-        <Route path="job/:id" element={<JobDetailsPage/>} />
-        <Route path="Profile" element={<ProfilePage/>} />
-        <Route path="CompanyHome" element={<CompanyHome/>} />
-      </Route>
-
-      <Route path="register" element={<Register />} />
-      <Route path="login" element={<Login />} />
-
-    </Routes>
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+      </Routes>
     </>
-
-  )
+  );
 }
 export default App;

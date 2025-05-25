@@ -16,7 +16,9 @@ export default function Home() {
 
   return (
     <>
-      <HeroSection />
+      {/* <HeroSection /> */}
+      {}
+      <JobsHero />
 
       <div className="container">
         <h1 style={{ fontSize: "50px" }} className="mx-5 ">

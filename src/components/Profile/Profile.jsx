@@ -47,7 +47,7 @@ const ProfilePage = () => {
         formData,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem("UserToken")}`,
             "Content-Type": "multipart/form-data",
           },
         }
@@ -127,7 +127,7 @@ const ProfilePage = () => {
                 >
                   Upload CV
                 </Button>
-                {isLoading ? "loading..." : "."}
+                {isLoading ? "loading..." : ""}
               </Box>
             ) : user.cv ? (
               <Box sx={{ mt: 2 }}>

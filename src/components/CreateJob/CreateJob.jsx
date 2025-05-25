@@ -52,18 +52,26 @@ function CreateJob() {
     salary_range: { min: 0, max: 0 },
   };
 
-  const handleSubmit = async (values, { setSubmitting, resetForm, setErrors }) => {
+  const handleSubmit = async (
+    values,
+    { setSubmitting, resetForm, setErrors }
+  ) => {
     setBackendError(null);
     setSuccessMessage(null);
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("UserToken");
 
     try {
-      const response = await axios.post("http://localhost:3000/api/job/create/", values, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        "http://localhost:4200/api/job/create/",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Job created successfully:", response.data);
 
       setSuccessMessage("Job created successfully!");
       resetForm();
@@ -79,7 +87,9 @@ function CreateJob() {
             formattedErrors[key] = errorData[key];
           });
           setErrors(formattedErrors);
-          setBackendError("Failed to create job. Please check the errors below.");
+          setBackendError(
+            "Failed to create job. Please check the errors below."
+          );
         }
       } else {
         setBackendError("Something went wrong: " + error.message);
@@ -92,7 +102,12 @@ function CreateJob() {
     <Container maxWidth="md" sx={{ py: 4 }}>
       <Typography
         variant="h4"
-        sx={{ color: "#0F1137", fontWeight: "bold", mb: 4, textAlign: "center" }}
+        sx={{
+          color: "#0F1137",
+          fontWeight: "bold",
+          mb: 4,
+          textAlign: "center",
+        }}
       >
         Create a New Job
       </Typography>
@@ -135,7 +150,6 @@ function CreateJob() {
             }}
           >
             <Grid container spacing={2}>
-
               <Grid item xs={12}>
                 <Field
                   as={TextField}
