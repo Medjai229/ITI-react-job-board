@@ -176,7 +176,6 @@
 
 // export default CreateJob;
 
-
 import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -235,7 +234,7 @@ function CreateJob() {
     job_type: "",
     job_status: "Open",
     company: "",
-    salary_range: { min: null, max: null },
+    salary_range: { min: "", max: "" },
   };
 
   const handleSubmit = async (
@@ -304,7 +303,7 @@ function CreateJob() {
           onSubmit={handleSubmit}
         >
           {({ errors, touched, resetForm, isSubmitting }) => (
-            <Form className="form-parent mt-5">
+            <Form className="form-parent mt-5 mb-5">
               <h3 className="position-relative pb-4 mb-4">
                 To submit job you should enter all fields
               </h3>
@@ -321,12 +320,15 @@ function CreateJob() {
                       placeholder="Job Title"
                     />
                     <label htmlFor="jobTitle">Job Title</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
                       {errors.title && touched.title ? errors.title : ""}
                     </div>
                   </div>
 
-                  <div className="form-floating mb-4">
+                  <div className="form-floating">
                     <Field
                       as="select"
                       name="job_type"
@@ -346,8 +348,13 @@ function CreateJob() {
                       ))}
                     </Field>
                     <label htmlFor="jobType">Job Type</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
-                      {errors.job_type && touched.job_type ? errors.job_type : ""}
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
+                      {errors.job_type && touched.job_type
+                        ? errors.job_type
+                        : ""}
                     </div>
                   </div>
                 </div>
@@ -364,8 +371,13 @@ function CreateJob() {
                       placeholder="Location"
                     />
                     <label htmlFor="location">Location</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
-                      {errors.location && touched.location ? errors.location : ""}
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
+                      {errors.location && touched.location
+                        ? errors.location
+                        : ""}
                     </div>
                   </div>
 
@@ -393,33 +405,19 @@ function CreateJob() {
                       )}
                     </Field>
                     <label htmlFor="company">Company</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
                       {errors.company && touched.company ? errors.company : ""}
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="form-floating mb-4">
-                <Field
-                  as="textarea"
-                  name="description"
-                  className={`form-control ${
-                    errors.description && touched.description ? "is-invalid" : ""
-                  }`}
-                  placeholder="Job Description"
-                  id="floatingTextarea2"
-                  style={{ height: 150 }}
-                />
-                <label htmlFor="floatingTextarea2">Job Description</label>
-                <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
-                  {errors.description && touched.description ? errors.description : ""}
-                </div>
-              </div>
-
               <div className="row gy-4">
                 <div className="col-md-6">
-                  <div className="form-floating mb-4">
+                  <div className="form-floating ">
                     <Field
                       name="salary_range.min"
                       type="number"
@@ -432,7 +430,10 @@ function CreateJob() {
                       placeholder="Minimum Salary"
                     />
                     <label htmlFor="salaryMin">Minimum Salary</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
                       {errors.salary_range?.min && touched.salary_range?.min
                         ? errors.salary_range.min
                         : ""}
@@ -454,7 +455,10 @@ function CreateJob() {
                       placeholder="Maximum Salary"
                     />
                     <label htmlFor="salaryMax">Maximum Salary</label>
-                    <div style={{ minHeight: "1.5em" }} className="invalid-feedback">
+                    <div
+                      style={{ minHeight: "1.5em" }}
+                      className="invalid-feedback"
+                    >
                       {errors.salary_range?.max && touched.salary_range?.max
                         ? errors.salary_range.max
                         : ""}
@@ -463,7 +467,31 @@ function CreateJob() {
                 </div>
               </div>
 
-              <div className="form-btns mt-4 d-flex justify-content-end">
+              <div className="form-floating mb-4">
+                <Field
+                  as="textarea"
+                  name="description"
+                  className={`form-control ${
+                    errors.description && touched.description
+                      ? "is-invalid"
+                      : ""
+                  }`}
+                  placeholder="Job Description"
+                  id="floatingTextarea2"
+                  style={{ height: 150 }}
+                />
+                <label htmlFor="floatingTextarea2">Job Description</label>
+                <div
+                  style={{ minHeight: "1.5em" }}
+                  className="invalid-feedback"
+                >
+                  {errors.description && touched.description
+                    ? errors.description
+                    : ""}
+                </div>
+              </div>
+
+              <div className="form-btns mt-4 d-flex justify-content-center">
                 <button
                   type="button"
                   onClick={() => {
@@ -471,15 +499,11 @@ function CreateJob() {
                     setSuccessMessage(null);
                     setBackendError(null);
                   }}
-                  className="btn btn-outline-secondary me-2"
+                  className="clear"
                 >
                   Clear
                 </button>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn btn-primary"
-                >
+                <button type="submit" disabled={isSubmitting} className="">
                   {isSubmitting ? "Submitting..." : "Submit"}
                 </button>
               </div>
