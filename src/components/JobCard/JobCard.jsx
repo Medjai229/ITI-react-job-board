@@ -1,8 +1,5 @@
-import React from "react";
-import useJobStore from "../../store/useJobsStore";
-
+import './JobCard.css'
 function JobCard({ job }) {
-
   const getJobTypeBackgroundColor = (jobType) => {
     switch (jobType) {
       case "Full Time":
@@ -35,15 +32,18 @@ function JobCard({ job }) {
     <div className="col-md-6">
       <div className="job-card bg-white py-4 px-5">
         <h3 className="job-title">{job.title}</h3>
-        <div className="info d-flex gap-2 fs-5">
+        <div className="info d-flex gap-2">
           <p className="comp-name">{job.company?.name}</p>
-          <span className="fw-bold">.</span>
+          <span className="">&bull;</span>
           <p className="address">{job.location}</p>
         </div>
         <div className="tags d-flex align-items-center gap-3">
           <div
             className="type position-relative"
-            style={{ backgroundColor: getJobTypeBackgroundColor(job.job_type), color: getJobTypeColor(job.job_type) }}
+            style={{
+              backgroundColor: getJobTypeBackgroundColor(job.job_type),
+              color: getJobTypeColor(job.job_type),
+            }}
           >
             {job.job_type}
           </div>

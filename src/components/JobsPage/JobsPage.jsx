@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useJobStore from "../../store/useJobsStore";
 import { Box, Pagination } from "@mui/material";
+// import HeroImage from "../../assets/man.png";
 
 import "./Jobs.css";
 import JobCard from "../JobCard/JobCard";
@@ -44,28 +45,7 @@ function JobsPage() {
     <>
       <div className="jobs">
         <JobsHero />
-        {/* <div className="explore w-100">
-          <div className="container py-5">
-            <p className="exp">Explore Best Job Opportunities</p>
-            <h2 className="emp">Empower 
-              <br></br>
-              Your Career</h2>
-            <p className="desc">
-              Discover your next career move with JobLinkup, the go-to job
-              <br></br>
-              marketplace for job seekers and employers.
-            </p>
-            <JobSearch />
-            <div className="popularSearch">
-              <p className="fw-bold mt-3 mb-2">Popular Search:</p>
-              <div className="tags d-flex flex-wrap gap-3">
-              {popularSearch.map((search)=> <div className="searchTag">{search}</div>)}
-              </div>
-
-            </div>
-          
-          </div>
-        </div> */}
+        
         <div className="jobs-area">
           <div className="container">
             <h2 className="py-5 fs-1 main-title">

@@ -1,17 +1,20 @@
 .jobs .explore {
-  background-color: #fff;
+  background-color: #FDFDFD;
 }
 
-.explore .container {
-  background-image: url(/public/man.png);
+.jobs .explore .container {
+  /* background-image: url(../../assets/man.png); */
+  background-image: url(../../assets/Hero.png);
   background-repeat: no-repeat;
   background-position: right bottom;
   background-size: contain;
+  height: 550px;
 }
 
 .jobs .exp {
   color: #4640de;
   font-size: 17px;
+  font-family: "ClashDisplay-Medium"; 
 }
 
 .jobs .emp {
@@ -30,7 +33,9 @@
 }
 
 .jobs .desc {
-  color: #515b6f;
+  color: #515B6F;
+   font-family: 'ClashDisplay-Regular';
+   font-size: 16px;
 }
 
 .jobs .explore .popularSearch > p {
@@ -45,6 +50,7 @@
   border-radius: 5px;
   color: #515b6f;
   background-color: #fff;
+  font-family: 'ClashDisplay-Regular';
 }
 
 .jobs-area {
@@ -66,15 +72,9 @@
 }
 
 .jobs-area .job-card:hover {
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
+  /* box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); */
+  box-shadow: 8px 8px 18.7px 0px #CCD4F299;
 
-.job-card .job-title {
-  color: #25324b;
-}
-
-.jobs-area .job-card .info {
-  color: #515b6f;
 }
 
 .jobs-area {
@@ -91,26 +91,4 @@
   transform: rotate(45deg);
 }
 
-.job-card .tags .type,
-.job-card .tags .status {
-  padding: 7px 15px;
-  border-radius: 20px;
-  font-weight: 500;
-  text-transform: capitalize;
-}
 
-.job-card .tags .type::after {
-  position: absolute;
-  content: "";
-  height: 100%;
-  width: 2px;
-  background-color: #d6ddeb;
-  top: 0;
-  right: -10px;
-}
-
-.job-card .tags .status {
-  color: #4640de;
-  border: 1px solid #4640de;
-  padding: 7px 25px;
-}

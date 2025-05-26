@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import ProfilePage from "./components/Profile/Profile";
 import Register from "./components/Register/Register";
 import Layout from "./components/Layout/Layout";
+import './assets/fonts/clash-display.css';
 
 function App() {
   return (
@@ -19,7 +20,7 @@ function App() {
           <Route path="jobs" element={<JobsPage />} />
           <Route path="job/:id" element={<JobDetailsPage />} />
           <Route path="Profile" element={<ProfilePage />} />
-          <Route path="CompanyHome" element={<CompanyHome />} />
+          <Route path="CompanyHome" element={<CompanyHome />} />{" "}
         </Route>
 
         <Route path="register" element={<Register />} />

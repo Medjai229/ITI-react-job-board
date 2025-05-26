@@ -33,6 +33,7 @@
   outline: none;
   width: 100%;
   background: transparent;
+  font-family: 'ClashDisplay-Regular';  
 }
 
 .jobSearch .searchInput::after {
@@ -58,6 +59,7 @@
   font-size: 14px;
   padding: 8px;
   width: 100%;
+  font-family: 'ClashDisplay-Regular';
 }
 
 .jobSearch button {

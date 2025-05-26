@@ -1,8 +1,8 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
 import logo from "./../../assets/Logo 1.png";
 import useUserStore from "../../store/User.store";
 import { useEffect } from "react";
+import './NavBar.css'
 
 export default function NavBar() {
   const { user, getUser } = useUserStore();
@@ -45,9 +45,16 @@ export default function NavBar() {
                     </Link>
                   </li>
                 )}
+                {user?.role === "job_seeker" && (
+                  <li className="nav-item">
+                    <Link to="/jobs" className="nav-link text-white">
+                      Find Jobs
+                    </Link>
+                  </li>
+                )}
                 <li className="nav-item">
                   <Link to="/CompanyHome" className="nav-link text-white">
-                    Companies
+                    Browse Companies
                   </Link>
                 </li>
               </ul>

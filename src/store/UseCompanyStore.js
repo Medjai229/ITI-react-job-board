@@ -15,7 +15,7 @@ const useCompanyStore = create((set) => ({
         "http://localhost:4200/api/companies/display",
         {
           headers: {
-            Authorization: `Bearer${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );

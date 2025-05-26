@@ -4,6 +4,7 @@ import JobCard from "../JobCard/JobCard";
 // import useJobStore from "../../store/useJobsStore";
 import useCompanyStore from "../../store/UseCompanyStore";
 import ComputerIcon from "@mui/icons-material/Computer";
+import JobsHero from "../JobsHero/JobsHero";
 export default function Home() {
   // const { jobs, loading, error, fetchJobs } = useJobStore();
   const { companies, getAllCompanies } = useCompanyStore();
@@ -12,16 +13,16 @@ export default function Home() {
     // fetchJobs();
     getAllCompanies();
     console.log("companies", companies);
-  }, [companies]);
+  }, []);
 
   return (
     <>
-      {/* <HeroSection /> */}
-      {}
-      <JobsHero />
+     <HeroSection />
+      
+      {/* <JobsHero /> */}
 
       <div className="container">
-        <h1 style={{ fontSize: "50px" }} className="mx-5 ">
+        <h1 style={{ fontSize: "50px" }} className=" ">
           Explore by <span style={{ color: "#26A4FF" }}>category </span>{" "}
         </h1>
 
