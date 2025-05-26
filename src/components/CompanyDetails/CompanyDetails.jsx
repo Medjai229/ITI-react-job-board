@@ -1,7 +1,8 @@
 import React from "react";
 import bannerImage from "../../assets/banner details.png";
-export default function CompanyDetails() {
+import image2 from "../../assets/image-2.png";
 
+export default function CompanyDetails() {
   const getJobTypeBackgroundColor = (jobType) => {
     switch (jobType) {
       case "Full Time":
@@ -16,8 +17,6 @@ export default function CompanyDetails() {
     }
   };
 
-
-  
   const getJobTypeColor = (jobType) => {
     switch (jobType) {
       case "Full Time":
@@ -42,12 +41,8 @@ export default function CompanyDetails() {
           </h1>
 
           <div className="container mx-5">
-            
-            <h3
-              style={{ fontSize: "25px", }}
-              className="my-5 "
-            >
-                About The Company 
+            <h3 style={{ fontSize: "25px" }} className="my-5 ">
+              About The Company
             </h3>
             <h3
               style={{ fontSize: "17px", fontFamily: "ClashDisplay-Medium" }}
@@ -80,36 +75,46 @@ export default function CompanyDetails() {
               }}
             ></div>
 
-                <h3
-              style={{ fontSize: "25px",color: "#26A4FF" }}
+            <h3
+              style={{ fontSize: "25px", color: "#26A4FF" }}
               className="my-5 "
             >
-                Job Opening At The Company
+              Job Opening At The Company
             </h3>
-      {/* job card  */}
-                  <div className="col-md-6 ">
-                    <div className="job-card bg-white py-4 px-5 rounded-3 shadow-sm mb-3">
-                      <h3 className="job-title">Engineer Trch</h3>
-                      <div className="info d-flex gap-2">
-                        <p className="comp-name"> Webflow</p>
-                        <span className="">&bull;</span>
-                        <p className="address">Brazil </p>
-                      </div>
-                      <div className="tags d-flex align-items-center gap-3">
-                        <div
-                          className="type position-relative"
-                          style={{
-                            // backgroundColor: getJobTypeBackgroundColor(job.job_type),
-                            // color: getJobTypeColor(job.job_type),
-                          }}
-                        >
-Design 
-
-                        </div>
-                        <div className="status"> Full Time </div>
-                      </div>
-                    </div>
+            {/* job card  */}
+            <div className="col-md-6 ">
+              <div className="job-card bg-white py-4 px-5 rounded-3 shadow-sm mb-3">
+                <h3 className="job-title">Engineer Trch</h3>
+                <div className="info d-flex gap-2">
+                  <p className="comp-name"> Webflow</p>
+                  <span className="">&bull;</span>
+                  <p className="address">Brazil </p>
+                </div>
+                <div className="tags d-flex align-items-center gap-3">
+                  <div
+                    className="type position-relative"
+                    style={
+                      {
+                        // backgroundColor: getJobTypeBackgroundColor(job.job_type),
+                        // color: getJobTypeColor(job.job_type),
+                      }
+                    }
+                  >
+                    Design
                   </div>
+                  <div className="status"> Full Time </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="banner my-5"
+              style={{
+                backgroundImage: `url(${image2})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                height: "300px",
+              }}
+            ></div>
           </div>
         </div>
       </div>
