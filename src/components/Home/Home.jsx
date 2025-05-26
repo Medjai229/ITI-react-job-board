@@ -13,7 +13,7 @@ export default function Home() {
     // fetchJobs();
     getAllCompanies();
     console.log("companies", companies);
-  }, [companies]);
+  }, []);
 
   return (
     <>
