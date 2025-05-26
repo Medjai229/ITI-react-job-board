@@ -12,10 +12,10 @@ import axios from "axios";
 
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/companies/display",
+        "http://localhost:4200/api/companies/display",
         {
           headers: {
-            Authorization: `Bearer${token}`,
+            Authorization: `Bearer ${token}`,
           },
         }
       );
@@ -31,7 +31,7 @@ import axios from "axios";
     const token = localStorage.getItem("UserToken");
     try {
       const res = axios.get(
-        `http://localhost:3000/api/companies/display/${id}`,
+        `http://localhost:4200/api/companies/display/${id}`,
         {
           headers: {
             Authorization: `Bearer${token}`,

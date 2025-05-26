@@ -1,181 +1,3 @@
-// import { useState } from "react";
-// import { Formik, Form, Field } from "formik";
-// import * as Yup from "yup";
-// import axios from "axios";
-// import "./CreateJob.css";
-
-// const jobTypes = ["Full Time", "Part Time", "Freelance", "Remote"];
-
-// const validationSchema = Yup.object({
-//   title: Yup.string()
-//     .matches(/^[A-Za-z\s]+$/, "Job title must contain only letters and spaces")
-//     .required("Job title is required"),
-//   description: Yup.string().required("Job description is required"),
-//   location: Yup.string().required("Location is required"),
-//   job_type: Yup.string()
-//     .oneOf(jobTypes, "Invalid job type")
-//     .required("Job type is required"),
-//   company: Yup.string().required("Company name is required"),
-//   salary_range: Yup.object({
-//     min: Yup.number()
-//       .min(0, "Minimum salary cannot be negative")
-//       .required("Minimum salary is required"),
-//     max: Yup.number()
-//       .min(Yup.ref("min"), "Maximum salary must be greater than minimum")
-//       .required("Maximum salary is required"),
-//   }),
-// });
-
-// function CreateJob() {
-//   const [backendError, setBackendError] = useState(null);
-//   const [successMessage, setSuccessMessage] = useState(null);
-
-//   const initialValues = {
-//     title: "",
-//     description: "",
-//     location: "",
-//     job_type: "",
-//     job_status: "Open",
-//     company: "",
-//     salary_range: { min: 0, max: 0 },
-//   };
-
-//   const handleSubmit = async (
-//     values,
-//     { setSubmitting, resetForm, setErrors }
-//   ) => {
-//     setBackendError(null);
-//     setSuccessMessage(null);
-
-//     const token = localStorage.getItem("UserToken");
-
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:4200/api/job/create/",
-//         values,
-//         {
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }
-//       );
-//       console.log("Job created successfully:", response.data);
-
-//       setSuccessMessage("Job created successfully!");
-//       resetForm();
-//       setSubmitting(false);
-//     } catch (error) {
-//       if (error.response) {
-//         const errorData = error.response.data;
-//         if (error.response.status === 401) {
-//           setBackendError("Unauthorized: Please log in to create a job.");
-//         } else {
-//           const formattedErrors = {};
-//           Object.keys(errorData).forEach((key) => {
-//             formattedErrors[key] = errorData[key];
-//           });
-//           setErrors(formattedErrors);
-//           setBackendError(
-//             "Failed to create job. Please check the errors below."
-//           );
-//         }
-//       } else {
-//         setBackendError("Something went wrong: " + error.message);
-//       }
-//       setSubmitting(false);
-//     }
-//   };
-
-//   return (
-//     <>
-//       <div className="post-job mt-5">
-//         <div className="container">
-//           <h2 className="text-center">
-//             Post a <span>Free Job</span>
-//           </h2>
-//           <div className="form-parent">
-//             <h3 className="position-relative pb-4">
-//               To submit job you should enter all fields
-//             </h3>
-//             <form className="mt-5">
-//               <div className="row gy-4">
-//                 <div className="col-md-6">
-//                   <div className="form-floating mb-4">
-//                     <input
-//                       type="text"
-//                       className="form-control"
-//                       id="jobTitle"
-//                       placeholder="Job Title"
-//                     />
-//                     <label htmlFor="jobTitle">Job Title</label>
-//                   </div>
-
-//                   <div className="form-floating">
-//                     <select
-//                       // value={""}
-//                       className="form-select"
-//                       id="jobType"
-//                       aria-label="Select job type"
-//                     >
-//                       <option>Select Job Type</option>
-//                       {jobTypes.map((type) => (
-//                         <option key={type} value={type}>
-//                           {type}
-//                         </option>
-//                       ))}
-//                     </select>
-//                     <label htmlFor="jobType">Job Type</label>
-//                   </div>
-//                 </div>
-
-//                 <div className="col-md-6">
-//                   <div className="form-floating mb-4">
-//                     <input
-//                       type="text"
-//                       className="form-control"
-//                       id="location"
-//                       placeholder="Location"
-//                     />
-//                     <label htmlFor="location">Location</label>
-//                   </div>
-
-//                   <div className="form-floating mb-4">
-//                     <input
-//                       type="text"
-//                       className="form-control"
-//                       id="company"
-//                       placeholder="Company"
-//                     />
-//                     <label htmlFor="company">Company</label>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               <div className="form-floating">
-//                 <textarea
-//                   className="form-control"
-//                   placeholder="Job Description"
-//                   id="floatingTextarea2"
-//                   style={{ height: 150 }}
-//                   defaultValue={""}
-//                 />
-//                 <label htmlFor="floatingTextarea2">Job Description</label>
-//               </div>
-
-//               <div className="form-btns mt-4 d-flex alin">
-//                 <button className="clear">Clear</button>
-//                 <button>Submit</button>
-//               </div>
-//             </form>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// export default CreateJob;
-
 import { useState, useEffect } from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
@@ -221,7 +43,7 @@ const validationSchema = Yup.object({
 function CreateJob() {
   const [backendError, setBackendError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
-  const { companies, getAllCompanies, isLoading } = useCompanyStore();
+  const { companies, getAllCompanies, isLoading, error } = useCompanyStore();
 
   useEffect(() => {
     getAllCompanies();
@@ -295,6 +117,11 @@ function CreateJob() {
         {backendError && (
           <div className="alert alert-danger mb-4" role="alert">
             {backendError}
+          </div>
+        )}
+        {error && (
+          <div className="alert alert-danger mb-4" role="alert">
+            {error}
           </div>
         )}
         <Formik
@@ -394,10 +221,14 @@ function CreateJob() {
                       <option value="" disabled>
                         Select Company
                       </option>
+
                       {isLoading ? (
                         <option disabled>Loading companies...</option>
+                      ) : !companies?.foundedCompany ||
+                        companies.foundedCompany.length === 0 ? (
+                        <option disabled>No companies available</option>
                       ) : (
-                        companies.map((company) => (
+                        companies.foundedCompany.map((company) => (
                           <option key={company._id} value={company._id}>
                             {company.name}
                           </option>
