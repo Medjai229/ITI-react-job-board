@@ -75,6 +75,7 @@ export default function CompanyDetails() {
               style={{
                 backgroundImage: `url(${bannerImage})`,
                 backgroundSize: "cover",
+                backgroundPosition: "bottom",
                 height: "470px",
               }}
             ></div>
