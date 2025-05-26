@@ -4,6 +4,7 @@ import "./CompanyHome.css";
 import image from "../../assets/Artboard 1.svg";
 import useCompanyStore from "../../store/UseCompanyStore";
 import image2 from "../../assets/image-2.png";
+import { Link } from "react-router-dom";
 export default function CompanyHome() {
   const { getAllCompanies, companies, isLoading, error } = useCompanyStore();
 
@@ -57,14 +58,16 @@ export default function CompanyHome() {
                     className="card-text my-3 text-secondary"
                     style={{ fontSize: "0.9rem" }}
                   >
-
                     {company.website}
                   </p>
 
                   <div className="mt-auto">
-                    <button className="btn btn-primary my-2 w-100 fw-semibold">
+                    <Link
+                      to={`/CompanyDetails/${company._id}`}
+                      className="btn btn-primary my-2 w-100 fw-semibold"
+                    >
                       View Company
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
