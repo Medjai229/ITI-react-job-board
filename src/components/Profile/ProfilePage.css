@@ -6,6 +6,7 @@
   --card-bg-color: #ffffff;
   --border-light-grey: #e0e0e0;
 }
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
 /* Section Card Styling */
 .section-card {
@@ -13,7 +14,6 @@
   border-radius: 0.5rem; /* Matches image, using rounded-3 */
   background-color: var(--card-bg-color);
   margin-bottom: 1.5rem; /* Equivalent to mb-3 */
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow matching image */
 }
 
 .section-header {
@@ -21,6 +21,12 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem; /* Adjust as needed for title spacing */
+}
+.bord {
+  border: 3px solid #4e54f0;
+}
+.back {
+  background-color: white;
 }
 
 /* Avatars/Images */
