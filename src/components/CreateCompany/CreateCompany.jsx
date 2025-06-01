@@ -1,24 +1,33 @@
 import React, { use } from "react";
 import { Formik, useFormik } from "formik";
 import useCompanyStore from "../../store/UseCompanyStore";
+import * as Yup from "yup";
 
 export default function CreateCompany() {
+  const SignupSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(5, "too short ")
+      .max(30, "too long")
+      .required("required"),
+    industry: Yup.string()
+      .min(5, "too short ")
+      .max(300, "too long")
+      .required("required"),
+    website: Yup.string().email("invald email").required("required"),
+  });
 
-
-const {CreateCompanies}=useCompanyStore()
-
-
+  const { CreateCompanies } = useCompanyStore();
   let formik = useFormik({
     initialValues: {
       name: "",
       industry: "",
       website: "",
     },
-    onSubmit:(values) => {
+    validationSchema: SignupSchema,
+    onSubmit: (values) => {
       CreateCompanies(values);
-    console.log(values);
-    
-    }
+      console.log(formik);
+    },
   });
 
   return (
@@ -34,7 +43,6 @@ const {CreateCompanies}=useCompanyStore()
 
           <div className="formcard">
             <form onSubmit={formik.handleSubmit}>
-
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Company Name
@@ -46,8 +54,14 @@ const {CreateCompanies}=useCompanyStore()
                   placeholder="Enter company name"
                   value={formik.values.name}
                   onChange={formik.handleChange}
-                  //   onBlur={handleBlur}
+                  onBlur={formik.handleBlur}
                 />
+
+                {formik.errors.name && formik.touched.name ? (
+                  <span className=" text-danger p-2">{formik.errors.name}</span>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div className="mb-3">
@@ -61,8 +75,14 @@ const {CreateCompanies}=useCompanyStore()
                   placeholder="Enter industry"
                   value={formik.values.industry}
                   onChange={formik.handleChange}
-                  //   onBlur={handleBlur}
+                  onBlur={formik.handleBlur}
                 />
+
+                {formik.errors.industry && formik.touched.industry ? (
+                  <span className=" text-danger p-2">{formik.errors.industry}</span>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div className="mb-3">
@@ -76,8 +96,13 @@ const {CreateCompanies}=useCompanyStore()
                   placeholder="Enter location"
                   value={formik.values.website}
                   onChange={formik.handleChange}
-                  //   onBlur={handleBlur}
+                  onBlur={formik.handleBlur}
                 />
+                {formik.errors.website && formik.touched.website ? (
+                  <span className=" text-danger p-2">{formik.errors.website}</span>
+                ) : (
+                  ""
+                )}
               </div>
 
               <button type="submit" className="btn btn-primary">
