@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import axios from "axios";
+import CreateCompany from "../components/CreateCompany/CreateCompany";
 
 const useCompanyStore = create((set) => ({
   companies: [],
@@ -26,11 +27,11 @@ const useCompanyStore = create((set) => ({
     }
   },
 
-  getCompanyBydetails: (id) => {
+  getCompanyBydetails:async (id) => {
     set({ isLoading: true });
     const token = localStorage.getItem("UserToken");
     try {
-      const res = axios.get(
+      const res = await axios.get(
         `http://localhost:4200/api/companies/display/${id}`,
         {
           headers: {
@@ -40,6 +41,25 @@ const useCompanyStore = create((set) => ({
       );
 
       set({ companies: res.data });
+    } catch (error) {
+      set({ error, isLoading: false });
+    }
+  },
+
+  CreateCompanies: async (formdata) => {
+    const token = localStorage.getItem("UserToken");
+    try {
+      const { data } = await axios.post(
+        "http://localhost:4200/api/companies/register",
+        formdata,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      console.log(data);
     } catch (error) {
       set({ error, isLoading: false });
     }

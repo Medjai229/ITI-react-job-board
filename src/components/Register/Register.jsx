@@ -72,7 +72,7 @@ export default function Register() {
       setApiError(null);
       setEmailExists(false); //Reset email existence state before submitting
       let response = await axios.post(
-        "http://localhost:4200/api/auth/signUp",
+        "http://localhost:4200/api/signUp/signUp",
         values
       );
       if (response.status === 200) {
